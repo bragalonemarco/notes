@@ -1,0 +1,22 @@
+databases:
+  - name: dpg-co7630ud3nmc73e4p2u0-a
+    plan: free
+    databaseName: db_vjiw
+    user: db_vjiw_user
+
+services:
+  - type: web
+    plan: free
+    name: notes
+    runtime: python3
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn mysite.asgi:application -k uvicorn.workers.UvicornWorker"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dpg-co7630ud3nmc73e4p2u0-a
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
