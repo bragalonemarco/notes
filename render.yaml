@@ -1,9 +1,3 @@
-databases:
-  - name: dpg-co7630ud3nmc73e4p2u0-a
-    plan: free
-    databaseName: db_vjiw
-    user: db_vjiw_user
-
 services:
   - type: web
     plan: free
@@ -14,7 +8,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: dpg-co7630ud3nmc73e4p2u0-a
+          name: db_vjiw
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
